@@ -43,7 +43,7 @@ const DateAndPosition = ({ item }) => {
       <div className="item-infos">
         {item.effective && moment(item.effective).format('YYYY') !== '1969' && (
           <span className="item-date">
-            {moment(item.effective).format('D/MM/YYYY')}
+            {moment(item.effective).format('D MMMM YYYY')}
           </span>
         )}
         {itemPosition && <span className="item-position">{itemPosition}</span>}

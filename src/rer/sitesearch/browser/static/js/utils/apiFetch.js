@@ -25,6 +25,8 @@ const metadata_fields = [
   'effective',
   'path',
   'path_depth',
+  'argomento',
+  'settore',
 ];
 
 export const updateHistory = ({ url, params }) => {

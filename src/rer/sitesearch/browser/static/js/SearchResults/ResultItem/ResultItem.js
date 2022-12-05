@@ -186,6 +186,35 @@ const ResultItem = ({ item }) => {
                               })}
                             </div>
                           )}
+                          {item.argomento && item.argomento.length > 0 && (
+                            <div className="item-categories">
+                              <FontAwesomeIcon icon={faTags} />
+                              {item.argomento.map(cat => {
+                                let queryString = `argomento.operator=and&argomento.query=${cat}`;
+                                if (site_name && site_name.length > 0) {
+                                  queryString += `&site_name=${site_name}`;
+                                }
+                                return (
+                                  <a
+                                    href={`${baseUrl}/@@${searchEndpoint}?${queryString}`}
+                                    key={cat}
+                                  >
+                                    {cat}
+                                  </a>
+                                );
+                              })}
+                            </div>
+                          )}
+                          {item.settore && (
+                            <div className="item-categories">
+                              <FontAwesomeIcon icon={faTags} />
+                              <a
+                                href={`${baseUrl}/@@${searchEndpoint}?settore.operator=and&settore.query=${item.settore}`}
+                              >
+                                {item.settore}
+                              </a>
+                            </div>
+                          )}
                         </div>
                       )}
                     </>
