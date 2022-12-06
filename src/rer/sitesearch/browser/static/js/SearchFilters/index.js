@@ -24,10 +24,10 @@ const SearchFilters = () => {
   const showMobileFilters =
     isMobile &&
     filters &&
-    filters.group &&
+    filters?.group &&
     facets &&
-    facets.groups &&
-    facets.groups.values[filters.group].advanced_filters;
+    facets?.groups &&
+    facets?.groups?.values?.[filters?.group]?.advanced_filters;
   return (
     <aside className="filters-wrapper" role="aside">
       <h2 className="sr-only" id="search-filters">

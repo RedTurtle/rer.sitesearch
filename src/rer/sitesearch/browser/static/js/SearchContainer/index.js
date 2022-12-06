@@ -223,11 +223,11 @@ class SearchContainer extends Component {
     const showSearchContainer =
       !isMobile &&
       filters &&
-      filters.group &&
+      filters?.group &&
       facets &&
-      facets.groups &&
-      facets.groups.values[filters.group] &&
-      facets.groups.values[filters.group].advanced_filters;
+      facets?.groups &&
+      facets?.groups?.values?.[filters?.group] &&
+      facets?.groups?.values?.[filters?.group]?.advanced_filters;
     return (
       <div className="rer-search-container">
         <SearchContext.Provider value={this.state}>
