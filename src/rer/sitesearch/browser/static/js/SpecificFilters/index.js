@@ -12,19 +12,19 @@ const SpecificFilters = ({ id }) => {
     ...facets.groups.values[filters.group].advanced_filters,
   };
   const isEventRangeDates =
-    advancedFilters.start &&
-    advancedFilters.start.type === 'date' &&
-    advancedFilters.end &&
-    advancedFilters.end.type === 'date';
+    advancedFilters?.start &&
+    advancedFilters?.start?.type === 'date' &&
+    advancedFilters?.end &&
+    advancedFilters?.end?.type === 'date';
 
   if (isEventRangeDates) {
-    advancedFilters = Object.keys(advancedFilters).reduce((acc, val) => {
+    advancedFilters = Object.keys(advancedFilters)?.reduce((acc, val) => {
       if (val === 'start' || val === 'end') {
         return {
           ...acc,
           date: {
             ...(acc.date ? acc.date : {}),
-            [val]: advancedFilters[val],
+            [val]: advancedFilters?.[val],
             type: 'date_range',
           },
         };
@@ -32,7 +32,7 @@ const SpecificFilters = ({ id }) => {
 
       return {
         ...acc,
-        [val]: advancedFilters[val],
+        [val]: advancedFilters?.[val],
       };
     }, {});
   }
@@ -54,12 +54,12 @@ const SpecificFilters = ({ id }) => {
         )}
       </div>
       <div className="row-specific-filters">
-        {Object.keys(advancedFilters).map(advFilter => (
+        {Object.keys(advancedFilters)?.map(advFilter => (
           <div className="col-specific-filters" key={advFilter}>
             <SpecificFilter
-              type={advancedFilters[advFilter].type}
+              type={advancedFilters?.[advFilter]?.type}
               id={advFilter}
-              {...advancedFilters[advFilter]}
+              {...advancedFilters?.[advFilter]}
               placeholder={translations[advFilter]}
               value={filters[advFilter]}
               setFilters={setFilters}
