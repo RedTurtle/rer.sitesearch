@@ -9,7 +9,7 @@ import qs from 'query-string';
 // in filters components, remove if necessary
 export const dotify = params => {
   var res = {};
-  function recurse(obj, current) {
+  function recurse(obj, current, dotJoin = false) {
     for (var key in obj) {
       var value = obj[key];
       if (
@@ -20,9 +20,17 @@ export const dotify = params => {
         res[key] = value?.query;
         continue;
       }
+
       var newKey = current ? current : key; // joined key with dot . NO. MORE
+      if (dotJoin) {
+        newKey = current ? current + '.' + key : key; // joined key with dot . NO. MORE
+      }
       if (value && typeof value === 'object' && !Array.isArray(value)) {
-        recurse(value, newKey); // it's a nested object, so do it again. Skip if is an array
+        recurse(
+          value,
+          newKey,
+          value.hasOwnProperty('query') && value.hasOwnProperty('operator'),
+        ); // it's a nested object, so do it again. Skip if is an array
       } else {
         res[newKey] = value; // it's not an object, so set the property
       }

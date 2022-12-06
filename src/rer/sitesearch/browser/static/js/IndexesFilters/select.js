@@ -42,13 +42,14 @@ const SelectField = ({ values, filters, index, setFilters, name }) => {
       placeholder={getPlaceholder()}
       aria-controls="sitesearch-results-list"
       value={options.filter(option =>
-        filters[index] ? filters[index].query.includes(option.value) : false,
+        filters[index] ? filters[index]?.query?.includes(option?.value) : false,
       )}
       onChange={option => {
         if (!option || option.length == 0) {
-          setFilters({ [index]: '' });
+          setFilters({ ...filters, [index]: '' });
         } else {
           setFilters({
+            ...filters,
             [index]: {
               query: option.map(({ value }) => value),
               operator: 'and',
