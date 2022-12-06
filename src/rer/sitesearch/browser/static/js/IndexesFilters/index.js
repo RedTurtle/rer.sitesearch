@@ -7,7 +7,7 @@ import BooleanField from './boolean';
 import DateField from './date';
 
 // faFolder
-const { faTags, faListUl } = icons;
+const { faTags, faListUl, faBriefcase } = icons;
 
 const IndexesFilters = () => {
   const { setFilters, filters, facets, results } = useContext(SearchContext);
@@ -27,6 +27,7 @@ const IndexesFilters = () => {
     const facet = facetsIndexes.values[index];
     const facetValues = facet.values;
     let field = '';
+
     switch (facet.type) {
       case 'BooleanIndex':
         field = (
@@ -49,6 +50,7 @@ const IndexesFilters = () => {
             values={facetValues}
             filters={filters}
             index={index}
+            name={facet.label}
             setFilters={setFilters}
           />
         );
@@ -56,11 +58,14 @@ const IndexesFilters = () => {
     }
     return facet.type === 'DateIndex' || Object.keys(facetValues).length > 0 ? (
       <div className="filter-item" key={index + idx}>
-        <h3>
-          {index === 'Subject' && <FontAwesomeIcon icon={faTags} />}
+        <h5 className={index}>
+          {(index === 'Subject' || index === 'argomento') && (
+            <FontAwesomeIcon icon={faTags} />
+          )}
           {index === 'Temi' && <FontAwesomeIcon icon={faListUl} />}{' '}
+          {index === 'settore' && <FontAwesomeIcon icon={faBriefcase} />}{' '}
           {facet.label}
-        </h3>
+        </h5>
         {field}
       </div>
     ) : null;

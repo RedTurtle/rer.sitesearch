@@ -208,6 +208,7 @@ const SpecificFilterDateRange = ({
     }
 
     setFilters(filters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rangeStart, rangeEnd]);
 
   return (
@@ -273,6 +274,7 @@ SpecificFilterDateRange.propTypes = {
     type: PropTypes.string,
     label: PropTypes.string,
   }),
+  type: PropTypes.string,
 };
 
 const SpecificFilter = ({ type, ...rest }) => {
@@ -291,5 +293,6 @@ const SpecificFilter = ({ type, ...rest }) => {
     return null;
   }
 };
+SpecificFilter.propTypes = SpecificFilterDateRange.propTypes;
 
 export default SpecificFilter;

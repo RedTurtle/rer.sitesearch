@@ -16,7 +16,7 @@ const SearchableTextFilter = ({ toggleAdvancedFilters }) => {
   return (
     <div className="filter-item">
       {translations['filters_title_Cerca'] && (
-        <h3>{translations['filters_title_Cerca']}</h3>
+        <h4>{translations['filters_title_Cerca']}</h4>
       )}
       <form className="default-search">
         <div className="input-group">
@@ -36,28 +36,28 @@ const SearchableTextFilter = ({ toggleAdvancedFilters }) => {
             }
             onChange={e => setSearchableText(e.target.value)}
           />
-          <span className="input-group-btn">
-            <button
-              className="btn btn-default"
-              type="submit"
-              onClick={e => {
-                e.preventDefault();
-                setFilters({
-                  SearchableText:
-                    searchableText !== null
-                      ? searchableText
-                      : filters.SearchableText,
-                });
-              }}
-              aria-label={
-                translations['button_Cerca']
-                  ? translations['button_Cerca']
-                  : 'Cerca'
-              }
-            >
-              <FontAwesomeIcon icon={faSearch} />
-            </button>
-          </span>
+
+          <button
+            className="btn btn-default"
+            type="submit"
+            onClick={e => {
+              e.preventDefault();
+              setFilters({
+                ...filters,
+                SearchableText:
+                  searchableText !== null
+                    ? searchableText
+                    : filters.SearchableText,
+              });
+            }}
+            aria-label={
+              translations['button_Cerca']
+                ? translations['button_Cerca']
+                : 'Cerca'
+            }
+          >
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
         </div>
         {isMobile && (
           <button

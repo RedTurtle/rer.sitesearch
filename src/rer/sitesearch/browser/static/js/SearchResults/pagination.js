@@ -1,5 +1,5 @@
+/* eslint-disable no-prototype-builtins */
 import React from 'react';
-//import SearchContext from '../../utils/searchContext';
 import ReactPaginate from 'react-paginate';
 import SearchContext from '../utils/searchContext';
 
@@ -7,9 +7,10 @@ const Pagination = () => {
   return (
     <SearchContext.Consumer>
       {({ setFilters, b_size, filters, total }) => {
-        const b_start = filters.b_start || 0;
+        const b_start = filters?.b_start?.hasOwnProperty('query')
+          ? filters?.b_start?.query
+          : filters?.b_start || 0;
         const currentPage = b_start === 0 ? 0 : b_start / b_size;
-
         const handlePageChange = data => {
           setFilters({ b_start: data.selected * b_size });
           setTimeout(() => {

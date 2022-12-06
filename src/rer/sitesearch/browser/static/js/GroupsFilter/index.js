@@ -1,21 +1,17 @@
+/* eslint-disable no-prototype-builtins */
 import React, { useContext } from 'react';
 import SearchContext from '../utils/searchContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getIcon } from '../utils/icons';
 
 const GroupsFilter = () => {
-  const { setFilters, filters, facets, translations } = useContext(
-    SearchContext,
-  );
+  const { setFilters, filters, facets } = useContext(SearchContext);
   if (!facets || !facets.groups) {
     return '';
   }
   return (
     <div className="filter-item">
-      <h3>
-        <i className="far fa-question-circle"></i>{' '}
-        {translations['Cosa'] ? translations['Cosa'] : 'Cosa'}
-      </h3>
+      <h5>Tipologia di contenuti</h5>
       {facets &&
         facets.groups &&
         facets.groups.order.map((group, idx) => {
@@ -24,26 +20,34 @@ const GroupsFilter = () => {
           if (!filters.group && idx === 0) {
             selected = true;
           } else {
-            if (filters.group === group) {
+            if (
+              filters?.group === group ||
+              (filters?.group?.hasOwnProperty('query') &&
+                filters?.group?.query === group)
+            ) {
               selected = true;
             }
           }
           return (
             <div className="radio" key={group + idx}>
-              <label className={selected ? 'selected text-primary' : ''}>
-                <input
-                  type="radio"
-                  name="types"
-                  value={groupData.types.length ? group : ''}
-                  checked={selected}
-                  aria-controls="sitesearch-results-list"
-                  onChange={e => {
-                    setFilters({ group: e.target.value });
-                  }}
-                />
-                {groupData.icon && (
-                  <FontAwesomeIcon icon={getIcon(groupData.icon)} />
-                )}
+              <input
+                type="radio"
+                name="types"
+                value={groupData.types.length ? group : ''}
+                checked={selected}
+                id={group}
+                aria-controls="sitesearch-results-list"
+                onChange={e => {
+                  setFilters({ group: e.target.value });
+                }}
+              />
+              {groupData.icon && (
+                <FontAwesomeIcon icon={getIcon(groupData.icon)} />
+              )}
+              <label
+                htmlFor={group}
+                className={selected ? 'selected text-primary' : ''}
+              >
                 {`${group} (${groupData.count})`}
               </label>
             </div>

@@ -62,7 +62,6 @@ YearMonthForm.propTypes = {
 
 const DateField = ({ filters, index, setFilters }) => {
   const { translations } = useContext(SearchContext);
-
   const getStartValue = () => {
     const indexValue = filters[index];
     if (!indexValue) {

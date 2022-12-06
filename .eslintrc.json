@@ -1,13 +1,8 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    // "plugin:flowtype/recommended",
-    "@redturtle/eslint-config"
-  ],
-  // "plugins": ["react", "flowtype"],
-  "plugins": ["react"],
+  "extends": ["@redturtle/react"],
+  "parser": "babel-eslint",
   "rules": {
+    "strict": 0,
     "prettier/prettier": [
       "warn",
       {
@@ -16,6 +11,7 @@
     ],
     "no-console": "off",
     "no-debugger": "off",
-    "indent": "off"
+    "indent": "off",
+    "react/prop-types": "off"
   }
 }

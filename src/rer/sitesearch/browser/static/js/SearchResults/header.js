@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import Select from 'react-select';
 import SearchContext from '../utils/searchContext';
@@ -20,22 +21,20 @@ const searchOrderMapping = {
 const Header = () => (
   <SearchContext.Consumer key="search-results-header">
     {({ getTranslationFor, facets, filters, setFilters, total }) => {
-      const allTotal = facets.groups.values
-        ? facets.groups.values[getTranslationFor('all_types_label')].count
+      const allTotal = facets?.groups?.values
+        ? facets?.groups?.values?.[getTranslationFor('all_types_label')]?.count
         : 0;
-      const group = filters.group;
-      const groupCount = group ? facets.groups.values[group].count : total;
+      const group = filters?.group;
+      const groupCount = group ? facets?.groups?.values?.[group]?.count : total;
       return (
         <div className="results-header">
-          {Object.keys(filters).length > 0 && (
+          {Object.keys(filters)?.length > 0 && (
             <div className="total-items">
               {groupCount < allTotal ? (
                 <>
                   <span>
                     <strong>{groupCount}</strong>{' '}
-                    <span className="desktop-only">
-                      {getTranslationFor('items on')}{' '}
-                    </span>
+                    <span className="desktop-only">{'risultati'}</span>
                     <span className="mobile-only">/ </span> {allTotal}{' '}
                     <span className="desktop-only">
                       {getTranslationFor('filtered')}
@@ -44,7 +43,7 @@ const Header = () => (
                 </>
               ) : (
                 <span>
-                  <strong>{allTotal}</strong> {getTranslationFor('items')}{' '}
+                  <strong>{allTotal}</strong> {'risultati'}
                 </span>
               )}
               {!(
@@ -70,7 +69,7 @@ const Header = () => (
             </div>
             <div className="select">
               <Select
-                options={Object.keys(searchOrderMapping).map(value => ({
+                options={Object.keys(searchOrderMapping)?.map(value => ({
                   value,
                   label: getTranslationFor(value),
                 }))}
@@ -78,10 +77,17 @@ const Header = () => (
                 isSearchable={false}
                 placeholder={getTranslationFor('Sort on')}
                 value={{
-                  value: filters.sort_on ? filters.sort_on : 'relevance',
+                  value: filters?.sort_on?.query
+                    ? filters.sort_on.query
+                    : filters?.sort_on || 'relevance',
                   label: getTranslationFor(
-                    filters.sort_on ? filters.sort_on : 'Relevance',
+                    filters?.sort_on?.query
+                      ? filters.sort_on.query
+                      : filters.sort_on || 'Relevance',
                   ),
+                }}
+                components={{
+                  IndicatorSeparator: () => null,
                 }}
                 onChange={option =>
                   setFilters(searchOrderMapping[option.value])

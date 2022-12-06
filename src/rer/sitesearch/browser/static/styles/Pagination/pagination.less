@@ -1,15 +1,46 @@
+/* stylelint-disable no-descending-specificity */
 .search-navigation {
     text-align: center;
 }
 
 .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     ul.pagination {
-        display: inline-flex;
-
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        li,
+        li a {
+            padding: 1rem 1.75rem;
+            border: none;
+            color: #7b7b7b !important;
+        }
         li {
-            a {
-                border-bottom-color: #ddd;
-            }
+            padding: 0 0.5rem;
+        }
+        li.previous a,
+        li.next a {
+            color: #0f206c !important;
+        }
+        li.active span {
+            border: 1px solid #0f206c;
+            background-color: #fff;
+            border-radius: 4px;
+            color: #0f206c;
+        }
+        .active a {
+            background-color: transparent;
+        }
+        span {
+            padding: 1rem 1.75rem;
+            font-weight: 600;
+        }
+        a:hover,
+        a:focus {
+            background-color: transparent;
+            text-decoration: underline;
         }
     }
 }

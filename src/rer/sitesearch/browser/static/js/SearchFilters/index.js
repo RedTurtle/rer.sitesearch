@@ -17,7 +17,6 @@ const SearchFilters = () => {
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(
     isMobile ? false : true,
   );
-
   useEffect(() => {
     setShowAdvancedSearch(isMobile ? false : true);
   }, [isMobile]);
@@ -47,7 +46,7 @@ const SearchFilters = () => {
       <div
         className={`advanced-search ${showAdvancedSearch ? 'open' : 'close'}`}
       >
-        {isMobile && (
+        {isMobile && showAdvancedSearch && (
           <>
             <div className="close-advanced-search">
               <button

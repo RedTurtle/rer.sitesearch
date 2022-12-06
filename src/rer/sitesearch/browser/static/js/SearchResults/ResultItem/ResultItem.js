@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -8,12 +9,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { icons } from '../../utils/icons';
 
 const {
-  faTag,
+  // faTag,
   faTags,
   faFolderOpen,
   faCalendarAlt,
-  faNewspaper,
+  // faNewspaper,
   faFile,
+  faComputerClassic,
+  faFileLines,
+  faTowerCell,
+  faRectangleHistory,
+  faLink,
+  faImage,
+  faUsersCog,
+  // faBoxArchive,
+  // faCircleS,
+  faBriefcase,
 } = icons;
 
 const ResultItem = ({ item }) => {
@@ -53,11 +64,34 @@ const ResultItem = ({ item }) => {
     if (item['@type'] === 'Event') {
       return faCalendarAlt;
     }
-    // if (item['@type'] === 'File') {
-    //   return 'fa-paperclip';
-    // }
+    if (item['@type'] === 'File') {
+      return faFile;
+    }
     if (item['@type'] === 'News Item') {
-      return faNewspaper;
+      return faTowerCell;
+    }
+    if (
+      item['@type'] === 'AreaApplicazioni' ||
+      item['@type'] === 'Applicazione'
+    ) {
+      return faComputerClassic;
+    }
+    if (item['@type'] === 'Document') {
+      return faFileLines;
+    }
+    if (item['@type'] === 'Collection') {
+      return faRectangleHistory;
+    }
+    if (item['@type'] === 'Link') {
+      return faLink;
+    }
+    if (item['@type'] === 'Image') {
+      // Add icon subclassing for images?
+      return faImage;
+    }
+    if (item['@type'] === 'GroupRoom') {
+      // Add icon subclassing for rooms?
+      return faUsersCog;
     }
     return faFile;
   };
@@ -90,6 +124,7 @@ const ResultItem = ({ item }) => {
                   <FontAwesomeIcon
                     icon={getIcon(item)}
                     title={getItemTypeLabel(item, translations)}
+                    color="#0f206c"
                   />
                 </div>
                 <h3 title={getTitleHover(item, translations)}>
@@ -157,7 +192,7 @@ const ResultItem = ({ item }) => {
 
                       {(item.themes || item.Subject) && (
                         <div className="item-tags">
-                          {item.themes && (
+                          {/* {item.themes && (
                             <div className="item-themes">
                               <FontAwesomeIcon icon={faTag} />
                               {item.themes.map(theme => (
@@ -166,8 +201,8 @@ const ResultItem = ({ item }) => {
                                 </a>
                               ))}
                             </div>
-                          )}
-                          {item.Subject && item.Subject.length > 0 && (
+                          )} */}
+                          {/* {item.Subject && item.Subject.length > 0 && (
                             <div className="item-categories">
                               <FontAwesomeIcon icon={faTags} />
                               {item.Subject.map(cat => {
@@ -185,29 +220,31 @@ const ResultItem = ({ item }) => {
                                 );
                               })}
                             </div>
-                          )}
+                          )} */}
                           {item.argomento && item.argomento.length > 0 && (
-                            <div className="item-categories">
-                              <FontAwesomeIcon icon={faTags} />
+                            <div className="item-categories argomento">
                               {item.argomento.map(cat => {
                                 let queryString = `argomento.operator=and&argomento.query=${cat}`;
                                 if (site_name && site_name.length > 0) {
                                   queryString += `&site_name=${site_name}`;
                                 }
                                 return (
-                                  <a
-                                    href={`${baseUrl}/@@${searchEndpoint}?${queryString}`}
-                                    key={cat}
-                                  >
-                                    {cat}
-                                  </a>
+                                  <span key={cat} className="argomento-item">
+                                    <FontAwesomeIcon icon={faTags} />
+                                    <a
+                                      href={`${baseUrl}/@@${searchEndpoint}?${queryString}`}
+                                      key={cat}
+                                    >
+                                      {cat}
+                                    </a>
+                                  </span>
                                 );
                               })}
                             </div>
                           )}
                           {item.settore && (
-                            <div className="item-categories">
-                              <FontAwesomeIcon icon={faTags} />
+                            <div className="item-categories settore">
+                              <FontAwesomeIcon icon={faBriefcase} />
                               <a
                                 href={`${baseUrl}/@@${searchEndpoint}?settore.operator=and&settore.query=${item.settore}`}
                               >

@@ -3,7 +3,7 @@ import SearchContext from '../utils/searchContext';
 import Select, { components } from 'react-select';
 import PropTypes from 'prop-types';
 
-const SelectField = ({ values, filters, index, setFilters }) => {
+const SelectField = ({ values, filters, index, setFilters, name }) => {
   const { translations } = useContext(SearchContext);
   const options = Object.keys(values).map(key => {
     const label = `${
@@ -14,6 +14,18 @@ const SelectField = ({ values, filters, index, setFilters }) => {
       label,
     };
   });
+  const getPlaceholder = () => {
+    switch (name) {
+      case 'Argomento':
+        return 'Cerca per argomento';
+
+      case 'Settore':
+        return 'Cerca per settore';
+
+      default:
+        return 'Seleziona un valore';
+    }
+  };
   return (
     <Select
       options={options}
@@ -24,9 +36,10 @@ const SelectField = ({ values, filters, index, setFilters }) => {
         MultiValueLabel: props => (
           <components.MultiValueLabel {...props} className="text-primary" />
         ),
+        IndicatorSeparator: () => null,
       }}
       className="rer-sitesearch-select text-primary"
-      placeholder="Seleziona un valore"
+      placeholder={getPlaceholder()}
       aria-controls="sitesearch-results-list"
       value={options.filter(option =>
         filters[index] ? filters[index].query.includes(option.value) : false,
