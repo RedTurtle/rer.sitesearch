@@ -9,7 +9,7 @@ const SpecificFilters = ({ id }) => {
     SearchContext,
   );
   let advancedFilters = {
-    ...facets.groups.values[filters.group].advanced_filters,
+    ...facets?.groups?.values?.[filters.group]?.advanced_filters,
   };
   const isEventRangeDates =
     advancedFilters?.start &&
