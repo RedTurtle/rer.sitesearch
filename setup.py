@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = "4.2.3pr_version"
+version = "4.2.3prversion"
 
 setup(
     name="rer.sitesearch",

@@ -4,7 +4,8 @@ Changelog
 4.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix things for Parma
+  [lucabel]
 
 
 4.2.2 (2022-09-30)
