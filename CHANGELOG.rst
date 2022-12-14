@@ -1,8 +1,8 @@
 Changelog
 =========
 
-4.2.3 (unreleased)
-------------------
+4.2.3prversion (2022-12-14)
+---------------------------
 
 - Fix things for Parma
   [lucabel]
