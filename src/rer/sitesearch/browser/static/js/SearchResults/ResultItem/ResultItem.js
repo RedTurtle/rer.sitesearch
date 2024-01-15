@@ -95,6 +95,22 @@ const ResultItem = ({ item }) => {
     }
     return faFile;
   };
+
+  const getCleanSector = sector => {
+    if (!sector) {
+      return sector;
+    }
+    const char = '-';
+    if (sector.includes(char)) {
+      const [code, valueToShow] = sector.split(char, 2);
+      const trimmedCode = code.trim();
+      if (!isNaN(trimmedCode)) {
+        return valueToShow.trim();
+      }
+    }
+    return sector;
+  };
+
   const getItemTypeLabel = (item, translations) => {
     return translations['type_' + item['@type']] || item['@type'];
   };
@@ -248,7 +264,7 @@ const ResultItem = ({ item }) => {
                               <a
                                 href={`${baseUrl}/@@${searchEndpoint}?settore.operator=and&settore.query=${item.settore}`}
                               >
-                                {item.settore}
+                                {getCleanSector(item.settore)}
                               </a>
                             </div>
                           )}

@@ -5,13 +5,28 @@ import PropTypes from 'prop-types';
 
 const SelectField = ({ values, filters, index, setFilters, name }) => {
   const { translations } = useContext(SearchContext);
+  const getCleanSector = sector => {
+    if (!sector) {
+      return sector;
+    }
+    const char = '-';
+    if (sector.includes(char)) {
+      const [code, valueToShow] = sector.split(char, 2);
+      const trimmedCode = code.trim();
+      if (!isNaN(trimmedCode)) {
+        return valueToShow.trim();
+      }
+    }
+    return sector;
+  };
+
   const options = Object.keys(values).map(key => {
     const label = `${
       translations[key.trim()] ? translations[key.trim()] : key
     } (${values[key]})`;
     return {
       value: key,
-      label,
+      label: name==='Settore'?getCleanSector(label):label,
     };
   });
   const getPlaceholder = () => {
