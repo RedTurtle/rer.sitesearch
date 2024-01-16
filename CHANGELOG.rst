@@ -4,7 +4,9 @@ Changelog
 4.2.4prversion (unreleased)
 ---------------------------
 
-- Nothing changed yet.
+- Change serp to use new version of settore voc
+  with office id
+  [lucabel]
 
 
 4.2.3prversion (2022-12-14)
