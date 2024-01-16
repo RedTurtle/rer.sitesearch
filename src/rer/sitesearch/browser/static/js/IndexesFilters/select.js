@@ -5,20 +5,20 @@ import PropTypes from 'prop-types';
 
 const SelectField = ({ values, filters, index, setFilters, name }) => {
   const { translations } = useContext(SearchContext);
-  const getCleanSector = sector => {
-    if (!sector) {
-      return sector;
-    }
-    const char = '-';
-    if (sector.includes(char)) {
-      const [code, valueToShow] = sector.split(char, 2);
-      const trimmedCode = code.trim();
-      if (!isNaN(trimmedCode)) {
-        return valueToShow.trim();
-      }
-    }
-    return sector;
-  };
+  // const getCleanSector = sector => {
+  //   if (!sector) {
+  //     return sector;
+  //   }
+  //   const char = '-';
+  //   if (sector.includes(char)) {
+  //     const [code, valueToShow] = sector.split(char, 2);
+  //     const trimmedCode = code.trim();
+  //     if (!isNaN(trimmedCode)) {
+  //       return valueToShow.trim();
+  //     }
+  //   }
+  //   return sector;
+  // };
 
   const options = Object.keys(values).map(key => {
     const label = `${
@@ -26,7 +26,7 @@ const SelectField = ({ values, filters, index, setFilters, name }) => {
     } (${values[key]})`;
     return {
       value: key,
-      label: name==='Settore'?getCleanSector(label):label,
+      label,
     };
   });
   const getPlaceholder = () => {
