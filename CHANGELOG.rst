@@ -1,7 +1,7 @@
 Changelog
 =========
 
-4.2.4prversion (unreleased)
+4.2.4prversion (2024-02-02)
 ---------------------------
 
 - Change serp to use new version of settore voc
