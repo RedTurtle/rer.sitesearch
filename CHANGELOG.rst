@@ -1,6 +1,12 @@
 Changelog
 =========
 
+4.2.5prversion (unreleased)
+---------------------------
+
+- Nothing changed yet.
+
+
 4.2.4prversion (2024-02-02)
 ---------------------------
 
